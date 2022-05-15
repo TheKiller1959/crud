@@ -21,7 +21,6 @@ const UserForm = ({ onCreate, defValues, onEdit }) => {
 
   const onSubmit = (res) => {
     onCreate(res)
-    onEdit(res)
     reset(defaultValues)
   };
 
@@ -42,8 +41,8 @@ const UserForm = ({ onCreate, defValues, onEdit }) => {
       <label htmlFor='birthday' >Birthday</label>
       <input id='birthday' type='date' required='required' {...register("birthday")} />
       <br />
-      <input type="submit" value="Create User" />
-      <input type="submit" value="Edit User" />
+      <input type="submit" value="Create User" {...register("CreateUser")}/>
+      <input type="submit" value="Edit User" {...register("editUser")}/>
     </form>
   )
 };

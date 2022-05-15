@@ -5,7 +5,8 @@ import UserCard from './components/UserCard';
 import createNewUser from './services/createNewUser';
 import deleteUser from './services/deleteUser';
 import editUser from './services/editUser';
-import getAllUsers from './services/getAllUsers';
+import { fetchAllUsers } from "./redux/crudSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
 
@@ -15,8 +16,11 @@ function App() {
   const [editDefValues, setEditDefValues] = useState({});
   const [editFormRes, setEditFormRes] = useState({});
 
+  const dispatch = useDispatch();
+  const { list } = useSelector(state => state.users);
+
   useEffect(() => {
-    getAllUsers()
+    dispatch(fetchAllUsers())
       .then((res) => {
         setUsers(res.data)
       })
