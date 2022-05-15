@@ -2,66 +2,38 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import UserForm from './components/UserForm';
 import UserCard from './components/UserCard';
-import createNewUser from './services/createNewUser';
-import deleteUser from './services/deleteUser';
-import editUser from './services/editUser';
-import { fetchAllUsers } from "./redux/crudSlice";
+import { createUser, deleteUserById, fetchAllUsers } from "./redux/crudSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
 
-  const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({});
   const [deleteId, setDeleteId] = useState('');
   const [editDefValues, setEditDefValues] = useState({});
-  const [editFormRes, setEditFormRes] = useState({});
+  const [isEdited, setIsEdited] = useState(false);
 
   const dispatch = useDispatch();
-  const { list } = useSelector(state => state.users);
+  const { list } = useSelector(state => state.user);
 
   useEffect(() => {
     dispatch(fetchAllUsers())
-      .then((res) => {
-        setUsers(res.data)
-      })
-  }, []);
+  }, [dispatch])
 
   useEffect(() => {
     if (newUser.first_name) {
-      createNewUser(newUser)
-        .then((res) => {
-          setUsers([...users, res.data])
-          setNewUser({})
-        })
+      dispatch(createUser(newUser))
     }
-  }, [newUser, users])
+  }, [newUser])
 
   useEffect(() => {
     const filterUser = (id) => {
-      const newArr = users.filter((user) => id !== user.id);
+      const newArr = list.filter((user) => id !== user.id);
       return newArr
     }
     if (deleteId) {
-      deleteUser(deleteId)
-        .then(() => {
-          setUsers(filterUser(deleteId))
-        })
+      dispatch(deleteUserById(deleteId))
     }
-  }, [deleteId, users]);
-
-  useEffect(() => {
-    const filterUser = (id) => {
-      const newArr = users.filter((user) => id !== user.id)
-      return newArr
-    }
-    if (editFormRes.id) {
-      editUser(editFormRes.id, editFormRes)
-        .then((res) => {
-          setUsers([res.data, ...filterUser(editFormRes.id)])
-          setEditFormRes({})
-        })
-    }
-  }, [editFormRes, users]);
+  }, [deleteId]);  
 
   const handlerOnCreateUser = (event) => {
     setNewUser(event)
@@ -71,16 +43,17 @@ function App() {
     setDeleteId(id)
   };
 
-  const handlerOnEdit = (editUser) => {
-    setEditDefValues(editUser)
+  const handlerOnEdit = (userObj) => {
+    setEditDefValues(userObj)
+    setIsEdited(true)
   };
 
-  const userList = users.map((user) => <UserCard userObj={user} onDelete={handlerOnDelete} onEdit={handlerOnEdit} key={user.id} />);
+  const userList = list.map((user) => <UserCard userObj={user} onDelete={handlerOnDelete} onEdit={handlerOnEdit} key={user.id} />);
 
   return (
     <div className="App">
       <header className="App-header">
-        <UserForm onCreate={handlerOnCreateUser} onEdit={handlerOnEdit} defValues={editDefValues} />
+        <UserForm onCreate={handlerOnCreateUser} onEdit={handlerOnEdit} defValues={editDefValues} isEdited={isEdited} setIsEdited={setIsEdited} />
         <span>
           {userList}
         </span>

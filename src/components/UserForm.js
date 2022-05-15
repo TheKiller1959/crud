@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useEffect } from "react";
+import { editUserById, fetchAllUsers } from "../redux/crudSlice";
+import { useDispatch } from "react-redux";
 
 const defaultValues = {
   first_name: "",
@@ -9,9 +11,10 @@ const defaultValues = {
   birthday: ""
 };
 
-const UserForm = ({ onCreate, defValues, onEdit }) => {
-
+const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited }) => {
+  
   const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (defValues) {
@@ -19,9 +22,16 @@ const UserForm = ({ onCreate, defValues, onEdit }) => {
     }
   }, [reset, defValues]);
 
-  const onSubmit = (res) => {
-    onCreate(res)
-    reset(defaultValues)
+  const onSubmit = (userObj) => {
+    if(!!isEdited) {
+      dispatch(editUserById(userObj))
+      setIsEdited(false)
+      reset(defaultValues)
+      dispatch(fetchAllUsers())
+    } else {
+      onCreate(userObj)
+      reset(defaultValues)
+    }
   };
 
   return (
@@ -41,8 +51,8 @@ const UserForm = ({ onCreate, defValues, onEdit }) => {
       <label htmlFor='birthday' >Birthday</label>
       <input id='birthday' type='date' required='required' {...register("birthday")} />
       <br />
-      <input type="submit" value="Create User" {...register("CreateUser")}/>
-      <input type="submit" value="Edit User" {...register("editUser")}/>
+      {/* <input {...register("id")} hidden /> */}
+      <input type="submit" value={isEdited ? "Edit User" : "Create User"} />
     </form>
   )
 };
