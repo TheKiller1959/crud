@@ -23,17 +23,13 @@ function App() {
     if (newUser.first_name) {
       dispatch(createUser(newUser))
     }
-  }, [newUser])
+  }, [newUser, dispatch])
 
   useEffect(() => {
-    const filterUser = (id) => {
-      const newArr = list.filter((user) => id !== user.id);
-      return newArr
-    }
     if (deleteId) {
       dispatch(deleteUserById(deleteId))
     }
-  }, [deleteId]);
+  }, [deleteId, dispatch]);
 
   const handlerOnCreateUser = (event) => {
     setNewUser(event)
