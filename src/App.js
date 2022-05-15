@@ -33,7 +33,7 @@ function App() {
     if (deleteId) {
       dispatch(deleteUserById(deleteId))
     }
-  }, [deleteId]);  
+  }, [deleteId]);
 
   const handlerOnCreateUser = (event) => {
     setNewUser(event)
@@ -52,12 +52,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <span>
+        {userList}
+      </span>
+      <span>
         <UserForm onCreate={handlerOnCreateUser} onEdit={handlerOnEdit} defValues={editDefValues} isEdited={isEdited} setIsEdited={setIsEdited} />
-        <span>
-          {userList}
-        </span>
-      </header>
+      </span>
     </div>
   )
 };

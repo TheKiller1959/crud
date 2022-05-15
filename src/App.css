@@ -1,38 +1,79 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #299494;
   min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
+  color: #000;
+}
+
+.App span:nth-child(2) {
+  min-height: 100vh;
+  padding: 50px;
+  background-color: #fff;
+}
+
+.App span:nth-child(1) {
+  min-height: 100vh;
+}
+
+/* UserForm */
+.user-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.user-field {
+  display: flex;
+  align-items: center;
+  padding: 5px 0px;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.user-field input {
+  background-color: lightgray;
+  border: 10px solid rgb(255, 255, 255);
+  border-radius: 40px;
+  text-align: center;
+  padding: 10px 0px;
+  font-size: large;
+  flex-grow: 1;
+}
+
+#birthday {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+#submit {
+  margin-top: 50px;
+  background-color: rgb(87, 114, 238);
+  border: 20px solid #fff;
+  border-radius: 40px;
+  padding: 10px 50px;
+  font-size: large;
+  color: #fff;
+}
+
+/* UserCard */
+.usr-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 80vh;
+  border-radius: 4rem;
+  padding: 0px 50px;
+  background-color: #fff;
+  margin-left: 100px;
+}
+
+.usr-btn button {
+  border: none;
+  background: none;
+  padding: 10px;
+  font-size: larger;
 }
