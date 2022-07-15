@@ -24,7 +24,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  padding: 5rem;
+  margin-left: 2rem;
+  width: max-content;
 }
 
 /* UserForm */
@@ -87,9 +88,6 @@
   border-radius: 2rem;
   padding: 0px 40px;
   background-color: #fff;
-  /* margin-bottom: 30px; */
-  width: 40vh;
-  height: 25vh;
   transition: all 0.3s ease-in-out;
 }
 
