@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './assets/styles/App.css';
 import UserForm from './components/UserForm';
 import UserCard from './components/UserCard';
 import { createUser, deleteUserById, fetchAllUsers } from "./redux/crudSlice";
@@ -48,12 +48,12 @@ function App() {
 
   return (
     <div className="App">
-      <span>
-        {userList}
-      </span>
-      <span>
+      <div className='userform'>
         <UserForm onCreate={handlerOnCreateUser} onEdit={handlerOnEdit} defValues={editDefValues} isEdited={isEdited} setIsEdited={setIsEdited} />
-      </span>
+      </div>
+      <div className='userlist'>
+        {userList}
+      </div>
     </div>
   )
 };

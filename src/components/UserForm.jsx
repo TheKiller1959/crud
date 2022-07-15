@@ -39,23 +39,23 @@ const UserForm = ({ onCreate, defValues, onEdit, isEdited, setIsEdited }) => {
   return (
     <form className='user-form' onSubmit={handleSubmit(onSubmit)} >
       <div className='user-field'>
-        <label htmlFor='first_name' ><FaUserAlt /></label>
-        <input id='first_name' placeholder='First Name' required='required' {...register("first_name")} />
+        <label htmlFor='first_name' ><p><FaUserAlt /></p></label>
+        <input id='first_name' placeholder='First Name' required {...register("first_name")} />
         <br />
         <label htmlFor='last_name' ></label>
-        <input id='last_name' placeholder='Last Name' required='required' {...register("last_name")} />
+        <input id='last_name' placeholder='Last Name' required {...register("last_name")} />
       </div>
       <div className='user-field'>
-        <label htmlFor='email' ><AiOutlineMail /></label>
-        <input id='email' type='email' placeholder='E-mail' required='required' {...register("email")} />
+        <label htmlFor='email' ><p><AiOutlineMail /></p></label>
+        <input id='email' type='email' placeholder='E-mail' required {...register("email")} />
       </div>
       <div className='user-field'>
-        <label htmlFor='password' ><FaLock /></label>
-        <input id='password' type='password' placeholder='Password' required='required' {...register("password")} />
+        <label htmlFor='password' ><p><FaLock /></p></label>
+        <input id='password' type='password' placeholder='Password' required {...register("password")} />
       </div>
       <div className='user-field'>
-        <label htmlFor='birthday' ><FaBirthdayCake /></label>
-        <input id='birthday' type='date' required='required' {...register("birthday")} />
+        <label htmlFor='birthday' ><p><FaBirthdayCake /></p></label>
+        <input id='birthday' type='date' required {...register("birthday")} />
       </div>
       <div className="submit">
         <input id='submit' type="submit" value={isEdited ? "Upload" : "Sign Up"} />

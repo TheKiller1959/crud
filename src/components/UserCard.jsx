@@ -12,8 +12,8 @@ const UserCard = ({ userObj, onDelete, onEdit }) => {
         <p><FaBirthdayCake /> {userObj.birthday}</p>
       </div>
       <div className="usr-btn">
-        <button onClick={() => onDelete(userObj.id)} ><FaRegTrashAlt /></button>
-        <button onClick={() => onEdit(userObj)}><FaPencilAlt /></button>
+        <button onClick={() => onDelete(userObj.id)} ><b><FaRegTrashAlt /></b></button>
+        <button onClick={() => onEdit(userObj)}><b><FaPencilAlt /></b></button>
       </div>
     </div>
   )
